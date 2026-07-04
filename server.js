@@ -233,8 +233,8 @@ app.post('/api/webhook', (req, res) => {
 });
 
 // Fallback to index.html if navigating manually
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, 'workshop.html'));
 });
 
 // Start the server
