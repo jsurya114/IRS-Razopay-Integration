@@ -13,14 +13,20 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 // Keep raw body for webhook signature verification
 app.use(express.json({
   verify: (req, res, buf) => {
     req.rawBody = buf.toString();
   }
 }));
-// Serve static files from the current directory
-app.use(express.static(__dirname));
+
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 /**
  * Helper: Generate Invoice PDF in memory
@@ -232,13 +238,15 @@ app.post('/api/webhook', (req, res) => {
   }
 });
 
-// Fallback to index.html if navigating manually
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, 'workshop.html'));
+// Render the main page — pass Razorpay Key ID to EJS template
+app.get('/', (req, res) => {
+  res.render('workshop', {
+    razorpayKeyId: process.env.RAZORPAY_KEY_ID
+  });
 });
 
 // Start the server
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
-  console.log(`👉 Open http://localhost:${PORT}/workshop.html to test the integration`);
+  console.log(`👉 Open http://localhost:${PORT} to test the integration`);
 });
