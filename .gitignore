@@ -1,2 +1,5 @@
-workshop.zip
+node_modules/
+.env
+.DS_Store
+*.log
 workshop.zip
