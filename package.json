@@ -1,0 +1,29 @@
+{
+  "name": "pte-facebook-advertisment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "clarity.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsurya114/IRS-Razopay-Integration.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jsurya114/IRS-Razopay-Integration/issues"
+  },
+  "homepage": "https://github.com/jsurya114/IRS-Razopay-Integration#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "nodemailer": "^9.0.3",
+    "pdfkit": "^0.19.1",
+    "razorpay": "^2.9.6"
+  }
+}
