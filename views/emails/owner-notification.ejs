@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Payment — IRS Learning</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f4f4; font-family: Arial, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f4; padding: 30px 0;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius:8px; overflow:hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+
+          <!-- Header -->
+          <tr>
+            <td style="background-color:#0f7b3e; padding: 24px 40px; text-align:center;">
+              <h1 style="margin:0; color:#ffffff; font-size:20px; font-weight:700;">💰 New Payment Received</h1>
+              <p style="margin:6px 0 0 0; color:#a3f0c4; font-size:14px;"><%= name %> — ₹<%= amount %></p>
+            </td>
+          </tr>
+
+          <!-- Lead Card -->
+          <tr>
+            <td style="padding: 32px 40px;">
+              <p style="margin:0 0 20px 0; font-size:15px; color:#333333; font-weight:600;">Student Details</p>
+
+              <table width="100%" cellpadding="0" cellspacing="0" style="border: 1px solid #e0e0e0; border-radius:6px; overflow:hidden; margin-bottom:28px;">
+                <tr style="background-color:#f8f9fa;">
+                  <td colspan="2" style="padding:10px 16px; font-size:12px; font-weight:700; color:#666666; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #e0e0e0;">
+                    Student Info
+                  </td>
+                </tr>
+                <tr style="border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 16px; font-size:14px; color:#666666; width:38%;">Name</td>
+                  <td style="padding:10px 16px; font-size:14px; color:#333333; font-weight:600;"><%= name %></td>
+                </tr>
+                <tr style="background-color:#fafafa; border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 16px; font-size:14px; color:#666666;">Email</td>
+                  <td style="padding:10px 16px; font-size:14px; color:#333333;"><%= email %></td>
+                </tr>
+                <tr style="border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 16px; font-size:14px; color:#666666;">Phone</td>
+                  <td style="padding:10px 16px; font-size:14px; color:#333333;"><%= phone %></td>
+                </tr>
+                <tr style="background-color:#fafafa; border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 16px; font-size:14px; color:#666666;">Package</td>
+                  <td style="padding:10px 16px; font-size:14px; color:#0f7b3e; font-weight:700;"><%= package %></td>
+                </tr>
+              </table>
+
+              <p style="margin:0 0 20px 0; font-size:15px; color:#333333; font-weight:600;">Payment Details</p>
+
+              <table width="100%" cellpadding="0" cellspacing="0" style="border: 1px solid #e0e0e0; border-radius:6px; overflow:hidden; margin-bottom:28px;">
+                <tr style="background-color:#f8f9fa;">
+                  <td colspan="2" style="padding:10px 16px; font-size:12px; font-weight:700; color:#666666; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #e0e0e0;">
+                    Transaction
+                  </td>
+                </tr>
+                <tr style="border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 16px; font-size:14px; color:#666666; width:38%;">Amount Paid</td>
+                  <td style="padding:10px 16px; font-size:14px; color:#0f7b3e; font-weight:700;">₹<%= amount %></td>
+                </tr>
+                <tr style="background-color:#fafafa; border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 16px; font-size:14px; color:#666666;">Payment ID</td>
+                  <td style="padding:10px 16px; font-size:14px; color:#333333; font-weight:600;"><%= paymentId %></td>
+                </tr>
+                <tr style="border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 16px; font-size:14px; color:#666666;">Order ID</td>
+                  <td style="padding:10px 16px; font-size:14px; color:#333333;"><%= orderId %></td>
+                </tr>
+                <tr style="background-color:#fafafa; border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 16px; font-size:14px; color:#666666;">Timestamp</td>
+                  <td style="padding:10px 16px; font-size:14px; color:#333333;"><%= date %></td>
+                </tr>
+              </table>
+
+              <p style="margin:0 0 20px 0; font-size:15px; color:#333333; font-weight:600;">UTM / Attribution</p>
+
+              <table width="100%" cellpadding="0" cellspacing="0" style="border: 1px solid #e0e0e0; border-radius:6px; overflow:hidden;">
+                <tr style="background-color:#f8f9fa;">
+                  <td colspan="2" style="padding:10px 16px; font-size:12px; font-weight:700; color:#666666; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #e0e0e0;">
+                    Marketing Attribution
+                  </td>
+                </tr>
+                <tr style="border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 16px; font-size:14px; color:#666666; width:38%;">UTM Source</td>
+                  <td style="padding:10px 16px; font-size:14px; color:#333333;"><%= utmSource || 'N/A' %></td>
+                </tr>
+                <tr style="background-color:#fafafa; border-bottom:1px solid #f0f0f0;">
+                  <td style="padding:10px 16px; font-size:14px; color:#666666;">UTM Medium</td>
+                  <td style="padding:10px 16px; font-size:14px; color:#333333;"><%= utmMedium || 'N/A' %></td>
+                </tr>
+                <tr>
+                  <td style="padding:10px 16px; font-size:14px; color:#666666;">UTM Campaign</td>
+                  <td style="padding:10px 16px; font-size:14px; color:#333333;"><%= utmCampaign || 'N/A' %></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#f8f9fa; padding: 18px 40px; text-align:center; border-top:1px solid #e0e0e0;">
+              <p style="margin:0; font-size:13px; color:#999999;">IRS Learning Internal Notification | <a href="mailto:enquiry@irsgroup.in" style="color:#0f7b3e; text-decoration:none;">enquiry@irsgroup.in</a></p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
