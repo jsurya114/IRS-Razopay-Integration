@@ -178,6 +178,8 @@ async function sendPostPaymentEmails(details, pdfBuffer) {
  * 1. CREATE ORDER
  */
 app.post('/api/create-order', async (req, res) => {
+  console.log('--- NEW ORDER REQUEST ---');
+  console.log('Body:', req.body);
   try {
     const { name, email, phone, mockPack } = req.body;
     
@@ -207,7 +209,9 @@ app.post('/api/create-order', async (req, res) => {
       receipt: `receipt_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`
     };
 
+    console.log('Creating Razorpay order with options:', options);
     const order = await razorpay.orders.create(options);
+    console.log('Razorpay order created:', order.id);
 
     orderStore.set(order.id, {
       name: safeName, email, phone,
@@ -235,6 +239,8 @@ app.post('/api/create-order', async (req, res) => {
  * 2. VERIFY PAYMENT
  */
 app.post('/api/verify-payment', async (req, res) => {
+  console.log('--- VERIFY PAYMENT REQUEST ---');
+  console.log('Body:', req.body);
   try {
     const { 
       razorpay_order_id, 
@@ -291,6 +297,7 @@ app.post('/api/verify-payment', async (req, res) => {
       };
 
       // Generate Invoice & Send Emails asynchronously so it doesn't block response
+      console.log('Triggering generateInvoicePDF and sendPostPaymentEmails...');
       generateInvoicePDF(details)
         .then(pdfBuffer => sendPostPaymentEmails(details, pdfBuffer))
         .catch(err => console.error('Error in post-payment processing:', err));
