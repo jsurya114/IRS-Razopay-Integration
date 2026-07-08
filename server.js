@@ -7,8 +7,8 @@ const ejs = require('ejs');
 
 // Server-enforced pricing — client cannot manipulate amount
 const PRICING = Object.freeze({
-  mockPack: 199,
-  basic: 99
+  mockPack: 1,
+  basic: 1
 });
 
 // In-memory store: orderId → { name, email, phone, amount, package, utmSource, utmMedium, utmCampaign }
@@ -82,7 +82,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/workshop', express.static(path.join(__dirname, 'public')));
 
 /**
  * Helper: Generate Invoice PDF in memory
@@ -366,10 +366,10 @@ app.post('/api/webhook', (req, res) => {
 });
 
 // Render the main page — pass Razorpay Key ID to EJS template
-app.get('/', (req, res) => {
-  res.render('workshop', {
-    razorpayKeyId: process.env.RAZORPAY_KEY_ID
-  });
+app.get(['/','/workshop'], (req, res) => {
+    res.render('workshop', {
+        razorpayKeyId: process.env.RAZORPAY_KEY_ID
+    });
 });
 
 // Start the server
