@@ -54,8 +54,8 @@ const apiLimiter = rateLimit({
   max: 20,
   message: { error: 'Too many requests, please try again later.' }
 });
-app.use('/api/create-order', apiLimiter);
-app.use('/api/verify-payment', apiLimiter);
+app.use(['/api/create-order', '/workshop/api/create-order'], apiLimiter);
+app.use(['/api/verify-payment', '/workshop/api/verify-payment'], apiLimiter);
 // /api/webhook intentionally excluded — Razorpay retries must get 2xx
 
 // Middleware
@@ -177,7 +177,7 @@ async function sendPostPaymentEmails(details, pdfBuffer) {
 /**
  * 1. CREATE ORDER
  */
-app.post('/api/create-order', async (req, res) => {
+app.post(['/api/create-order', '/workshop/api/create-order'], async (req, res) => {
   console.log('--- NEW ORDER REQUEST ---');
   console.log('Body:', req.body);
   try {
@@ -238,7 +238,7 @@ app.post('/api/create-order', async (req, res) => {
 /**
  * 2. VERIFY PAYMENT
  */
-app.post('/api/verify-payment', async (req, res) => {
+app.post(['/api/verify-payment', '/workshop/api/verify-payment'], async (req, res) => {
   console.log('--- VERIFY PAYMENT REQUEST ---');
   console.log('Body:', req.body);
   try {
@@ -320,7 +320,7 @@ app.post('/api/verify-payment', async (req, res) => {
 /**
  * 3. WEBHOOK
  */
-app.post('/api/webhook', (req, res) => {
+app.post(['/api/webhook', '/workshop/api/webhook'], (req, res) => {
   try {
     const signature = req.headers['x-razorpay-signature'];
     const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET;

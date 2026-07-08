@@ -1892,7 +1892,7 @@
 
     loading(true);
     try{
-      var res = await fetch('/api/create-order', {
+      var res = await fetch('api/create-order', {
         method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ name: name, email: email, phone: phone, mockPack: mockPack, utm: attr })
       });
@@ -1915,7 +1915,7 @@
         theme: { color: "#FBBD29", hide_topbar: true },
         handler: async function(resp){
           try{
-            var vres = await fetch('/api/verify-payment', {
+            var vres = await fetch('api/verify-payment', {
               method:'POST', headers:{'Content-Type':'application/json'},
               body: JSON.stringify({
                 razorpay_order_id: resp.razorpay_order_id,
