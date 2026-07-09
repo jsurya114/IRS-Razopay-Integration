@@ -280,13 +280,7 @@ app.post(['/api/verify-payment', '/workshop/api/verify-payment'], async (req, re
       return res.status(400).json({ success: false, error: 'Missing payment details' });
     }
 
-    // Replay attack guard — same paymentId cannot be processed twice
-    if (processedPayments.has(razorpay_payment_id)) {
-      console.warn(`⚠️ Duplicate payment attempt blocked: ${razorpay_payment_id}`);
-      return res.status(409).json({ success: false, error: 'Payment already processed' });
-    }
-
-    // Verify signature mathematically
+    // 1. Verify signature mathematically FIRST (for security)
     const body = razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSignature = crypto
       .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
@@ -295,10 +289,18 @@ app.post(['/api/verify-payment', '/workshop/api/verify-payment'], async (req, re
 
     const sigBuffer = Buffer.from(razorpay_signature, 'hex');
     const expBuffer = Buffer.from(expectedSignature, 'hex');
+    
     if (sigBuffer.length === expBuffer.length && crypto.timingSafeEqual(sigBuffer, expBuffer)) {
+      
+      // 2. Race condition check — if Webhook processed this first, just return success!
+      if (processedPayments.has(razorpay_payment_id)) {
+        console.log(`ℹ️ Payment ${razorpay_payment_id} already processed by webhook. Returning success to frontend.`);
+        return res.json({ success: true, accessToken: crypto.randomBytes(16).toString('hex') });
+      }
+
       console.log(`✅ Payment verified successfully for ${email} (ID: ${razorpay_payment_id})`);
 
-      // Hard-fail if orderStore entry is missing — no fallback to req.body
+      // Hard-fail if orderStore entry is missing
       const stored = orderStore.get(razorpay_order_id);
       if (!stored) {
         console.error(`❌ orderId ${razorpay_order_id} not found in orderStore — possible replay or server restart`);
