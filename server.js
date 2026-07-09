@@ -7,8 +7,8 @@ const ejs = require('ejs');
 
 // Server-enforced pricing — client cannot manipulate amount
 const PRICING = Object.freeze({
-  mockPack: 1,
-  basic: 1
+  mockPack: 20,
+  basic: 15
 });
 
 // In-memory store: orderId → { name, email, phone, amount, package, utmSource, utmMedium, utmCampaign }
