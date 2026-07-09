@@ -386,16 +386,22 @@ app.post(['/api/webhook', '/workshop/api/webhook'], (req, res) => {
           console.log(`📧 Webhook safety net: verify-payment did NOT process ${paymentData.id} — sending emails now`);
           processedPayments.add(paymentData.id);
 
+          const stored = orderStore.get(paymentData.order_id) || {};
           const details = {
-            name: (paymentData.notes && paymentData.notes.name) || 'Student',
-            email: paymentData.email || (paymentData.notes && paymentData.notes.email) || '',
-            phone: paymentData.contact || (paymentData.notes && paymentData.notes.phone) || '',
+            name: stored.name || (paymentData.notes && paymentData.notes.name) || 'Student',
+            email: stored.email || paymentData.email || (paymentData.notes && paymentData.notes.email) || '',
+            phone: stored.phone || paymentData.contact || (paymentData.notes && paymentData.notes.phone) || '',
             orderId: paymentData.order_id || '',
             paymentId: paymentData.id,
             amount: paymentData.amount / 100,
-            package: (paymentData.notes && paymentData.notes.package) || 'N/A',
+            package: stored.package || (paymentData.notes && paymentData.notes.package) || 'N/A',
+            utmSource: stored.utmSource || null,
+            utmMedium: stored.utmMedium || null,
+            utmCampaign: stored.utmCampaign || null,
             date: new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })
           };
+          // Clean up the store since the webhook processed it
+          if (paymentData.order_id) orderStore.delete(paymentData.order_id);
 
           if (details.email) {
             generateInvoicePDF(details)
