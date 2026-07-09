@@ -127,7 +127,31 @@ async function generateInvoicePDF(details) {
 }
 
 /**
- * Helper: Send Emails
+ * Helper: Retry sendMail with exponential backoff
+ * Retries up to maxRetries times with delays: 1s → 2s → 4s
+ */
+async function retrySendMail(mailOptions, label, maxRetries = 3) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const info = await mailer.sendMail(mailOptions);
+      console.log(`✅ ${label} sent (messageId: ${info.messageId}, attempt: ${attempt})`);
+      return info;
+    } catch (error) {
+      console.error(`❌ ${label} failed (attempt ${attempt}/${maxRetries}):`, error.message);
+      if (attempt < maxRetries) {
+        const delayMs = Math.pow(2, attempt - 1) * 1000; // 1s, 2s, 4s
+        console.log(`⏳ Retrying ${label} in ${delayMs}ms...`);
+        await new Promise(resolve => setTimeout(resolve, delayMs));
+      } else {
+        console.error(`🚨 ${label} PERMANENTLY FAILED after ${maxRetries} attempts. Payment ID: ${mailOptions._paymentId || 'unknown'}`);
+      }
+    }
+  }
+  return null;
+}
+
+/**
+ * Helper: Send Emails — student and owner are independent (one failing won't block the other)
  */
 async function sendPostPaymentEmails(details, pdfBuffer) {
   if (!process.env.SMTP_USERNAME) {
@@ -135,43 +159,46 @@ async function sendPostPaymentEmails(details, pdfBuffer) {
     return;
   }
 
+  // Render HTML templates (fail fast if templates are broken)
+  let studentHtml, ownerHtml;
   try {
-    // Render HTML templates
-    const studentHtml = await ejs.renderFile(
+    studentHtml = await ejs.renderFile(
       path.join(__dirname, 'views/emails/student-confirmation.ejs'),
       details
     );
-    const ownerHtml = await ejs.renderFile(
+    ownerHtml = await ejs.renderFile(
       path.join(__dirname, 'views/emails/owner-notification.ejs'),
       details
     );
-
-    // Student confirmation email
-    await mailer.sendMail({
-      from: `"IRS Learning" <${process.env.SMTP_USERNAME}>`,
-      to: details.email,
-      subject: 'Payment Confirmed — IRS Learning',
-      html: studentHtml,
-      attachments: [{
-        filename: `Invoice_${details.paymentId}.pdf`,
-        content: pdfBuffer,
-        contentType: 'application/pdf'
-      }]
-    });
-
-    // Owner notification email
-    await mailer.sendMail({
-      from: `"IRS Payments" <${process.env.SMTP_USERNAME}>`,
-      to: process.env.OWNER_EMAIL || 'enquiry@irsgroup.in',
-      subject: `New Payment — ${details.name} | ₹${details.amount}`,
-      html: ownerHtml
-    });
-
-    console.log(`✅ Emails sent — student: ${details.email}, owner: ${process.env.OWNER_EMAIL}`);
-  } catch (error) {
-    console.error('❌ Email send failed:', error);
-    // Don't rethrow — payment was successful, email failure is non-fatal
+  } catch (templateErr) {
+    console.error('❌ Email template render failed:', templateErr);
+    return;
   }
+
+  // Send both emails independently — one failing does NOT block the other
+  const studentPromise = retrySendMail({
+    from: `"IRS Learning" <${process.env.SMTP_USERNAME}>`,
+    to: details.email,
+    subject: 'Payment Confirmed — IRS Learning',
+    html: studentHtml,
+    attachments: pdfBuffer ? [{
+      filename: `Invoice_${details.paymentId}.pdf`,
+      content: pdfBuffer,
+      contentType: 'application/pdf'
+    }] : [],
+    _paymentId: details.paymentId
+  }, `Student email → ${details.email}`);
+
+  const ownerPromise = retrySendMail({
+    from: `"IRS Payments" <${process.env.SMTP_USERNAME}>`,
+    to: process.env.OWNER_EMAIL || 'enquiry@irsgroup.in',
+    subject: `New Payment — ${details.name} | ₹${details.amount}`,
+    html: ownerHtml,
+    _paymentId: details.paymentId
+  }, `Owner email → ${process.env.OWNER_EMAIL}`);
+
+  // Wait for both, but neither blocks the other
+  await Promise.allSettled([studentPromise, ownerPromise]);
 }
 
 /**
@@ -350,9 +377,34 @@ app.post(['/api/webhook', '/workshop/api/webhook'], (req, res) => {
       if (event === 'payment.captured') {
         const paymentData = req.body.payload.payment.entity;
         console.log(`🔔 Webhook: Payment captured for ${paymentData.amount / 100} INR (ID: ${paymentData.id})`);
-        // We could also trigger invoice and emails here, but since the verify-payment
-        // route already does it immediately, we should be careful about sending duplicate emails.
-        // For simplicity, we just log it.
+
+        // Safety net: if verify-payment already sent emails, processedPayments will have this ID.
+        // Only send emails if the client-side verify path was missed (e.g. browser closed mid-request).
+        if (!processedPayments.has(paymentData.id)) {
+          console.log(`📧 Webhook safety net: verify-payment did NOT process ${paymentData.id} — sending emails now`);
+          processedPayments.add(paymentData.id);
+
+          const details = {
+            name: (paymentData.notes && paymentData.notes.name) || 'Student',
+            email: paymentData.email || (paymentData.notes && paymentData.notes.email) || '',
+            phone: paymentData.contact || (paymentData.notes && paymentData.notes.phone) || '',
+            orderId: paymentData.order_id || '',
+            paymentId: paymentData.id,
+            amount: paymentData.amount / 100,
+            package: (paymentData.notes && paymentData.notes.package) || 'N/A',
+            date: new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })
+          };
+
+          if (details.email) {
+            generateInvoicePDF(details)
+              .then(pdfBuffer => sendPostPaymentEmails(details, pdfBuffer))
+              .catch(err => console.error('❌ Webhook email processing error:', err));
+          } else {
+            console.warn('⚠️ Webhook: No email found in payment data — cannot send confirmation');
+          }
+        } else {
+          console.log(`✅ Webhook: Payment ${paymentData.id} already processed via verify-payment — skipping emails`);
+        }
       }
       res.status(200).send('OK');
     } else {
