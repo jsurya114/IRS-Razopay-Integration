@@ -61,7 +61,7 @@
     border-radius:var(--radius-pill); border:0; cursor:pointer; text-decoration:none;
     transition:transform .2s var(--ease-out), box-shadow .3s var(--ease-out); position:relative; overflow:hidden; }
   .btn:hover{ transform:translateY(-2px); }
-  .btn-primary{ background:#115f2a; color:#fff; box-shadow:0 12px 30px -12px rgba(251,189,41,.55); }
+  .btn-primary{ background:#278f56; color:#fff; box-shadow:0 12px 30px -12px rgba(251,189,41,.55); }
   .btn-primary:hover{ box-shadow:0 18px 42px -12px rgba(251,189,41,.62); }
   .btn-primary::after{ content:""; position:absolute; top:0; left:-70%; width:45%; height:100%;
     background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent); transform:skewX(-18deg); pointer-events:none; }
@@ -115,7 +115,7 @@
 
   /* —— HERO —— */
   .hero{ padding:22px 0 0; }
-  .hero-card{ position:relative; overflow:hidden; border-radius:28px; background: #052a20;
+  .hero-card{ position:relative; overflow:hidden; border-radius:28px; background: #127157;
     color:var(--paper); padding:clamp(26px,4.6vw,52px); }
   .grid-tx{ position:absolute; inset:0; pointer-events:none; opacity:.6;
     background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
@@ -181,7 +181,7 @@
   /* —— hero value bullets (the "what you get") —— */
   .h-gets{ list-style:none; margin:22px 0 0; padding:0; display:grid; gap:12px; }
   .h-gets li{ display:flex; gap:11px; font-size:15.5px; color:rgba(247,245,240,.86); line-height:1.4; }
-  .h-gets li .ic{ width:19px; height:19px; color:#107a2f; margin-top:1px; flex:none; stroke-width:2.6; }
+  .h-gets li .ic{ width:19px; height:19px; color:#fbfbfb; margin-top:1px; flex:none; stroke-width:2.6; }
   .h-gets li b{ color:#f0c154; font-weight:700; }
   .hero-foot{ display:flex; align-items:center; gap:8px 20px; flex-wrap:wrap; margin-top:22px; }
 
@@ -195,7 +195,7 @@
     right: 0;
     top: 0;
     height: 10px;
-    background: linear-gradient(90deg, #1e8536, #1e8536);
+    background: linear-gradient(90deg, #139a75, #139a75);
 }
   .enroll-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:3px; }
   .enroll-live{ display:inline-flex; align-items:center; gap:7px; font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#D23B30; }
@@ -785,7 +785,7 @@
   /* —— SITE FOOTER (structure & content matches /apply) —— */
   .site-footer{ background:var(--teal-950); color:var(--paper); }
   .site-footer .inner{ padding:64px 22px; }
-  .ft-grid{ display:grid; grid-template-columns:1.5fr 1fr 1fr 1.3fr 1fr; gap:40px; }
+  .ft-grid{ display:grid; grid-template-columns:1.5fr 1fr 1fr 1.3fr; gap:40px; }
   .ft-logo{ display:flex; align-items:center; gap:9px; margin-bottom:16px; }
   .ft-logo-mark{ width:32px; height:32px; border-radius:9px; background:#107a2f; color:var(--teal); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px; }
   .ft-logo-word{ font-family:var(--font-sans); font-weight:700; font-size:18px; color:#fff; }
@@ -913,9 +913,12 @@
   .reader-tags .rt.pre {
     opacity: 1 !important;
 }
+.rt.pre {
+  color: #fff;
+}
 </style>
 </head>
-<body style="background-color: #000;">
+<body>
 <div class="wrap">
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="g-logo" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></symbol></svg>
@@ -956,10 +959,16 @@
               <span class="ep-now mono">₹499</span>
               <span class="ep-meta"><s class="mono">₹2,999</s><span class="ep-off">80% OFF</span></span>
             </div>
-            <a class="enroll-grev" href="https://share.google/j01KQFivJWFxgZvNE" target="_blank" rel="noopener" aria-label="Rated 4.9 from 491 Google reviews">
-              <span class="egr-top"><svg class="gbadge-g"><use href="#g-logo"/></svg><b>4.9</b><span class="gstars">★★★★★</span></span>
-              <span class="egr-sub">491 reviews</span>
-            </a>
+           <a class="enroll-grev" href="https://share.google/mSvcHcNkSInKnNIYx" target="_blank" rel="noopener" aria-label="View IRS Learning Google Reviews">
+  <span class="egr-top">
+    <svg class="gbadge-g">
+      <use href="#g-logo"/>
+    </svg>
+    <b>4.7</b>
+    <span class="gstars">★★★★★</span>
+  </span>
+  <span class="egr-sub">1652 Google Reviews</span>
+</a>
           </div>
           <div class="enroll-when">
             <div class="ew-row"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span><b>Saturday, 1 August 2026</b></span></div>
@@ -975,11 +984,11 @@
               <div class="ecd-u"><b data-s>—</b><small>sec</small></div>
             </div>
           </div>
-          <div class="enroll-seats">
+          <!-- <div class="enroll-seats">
             <div class="es-top"><span class="es-lab">Seats remaining</span><span class="es-warn">Filling fast</span></div>
             <div class="seatbar"><span class="seatfill"></span></div>
             <div class="es-t">Only <b data-seats>—</b> of 100 seats left</div>
-          </div>
+          </div> -->
           <a class="btn btn-primary btn-lg btn-block" href="#book">Claim my seat<svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </aside>
       </div>
@@ -995,10 +1004,16 @@
         <p class="s">These are genuine Pearson score reports shared with the students' consent.</p>
       </div>
       <div class="pstats">
-        <a class="pstat g" href="https://share.google/j01KQFivJWFxgZvNE" target="_blank" rel="noopener" aria-label="Rated 4.9 from 491 Google reviews">
-          <span class="gtop"><svg class="gbadge-g"><use href="#g-logo"/></svg><b>4.9</b><span class="gstars">★★★★★</span></span>
-          <span class="l">491 Google reviews</span>
-        </a>
+        <a class="pstat g" href="https://share.google/mSvcHcNkSInKnNIYx" target="_blank" rel="noopener" aria-label="View IRS Learning Google Reviews">
+  <span class="gtop">
+    <svg class="gbadge-g">
+      <use href="#g-logo"/>
+    </svg>
+    <b>4.7</b>
+    <span class="gstars">★★★★★</span>
+  </span>
+  <span class="l">1652 Google Reviews</span>
+</a>
         <div class="pstat">
           <span class="n">2,500+</span>
           <span class="l">students trained</span>
@@ -1031,8 +1046,11 @@
         <div class="scw-foot"><span><b>Rahul Raj</b> · May 2026</span><span class="verify">Verify<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
       </figure>
     </div>
+    <p class="res-disc rev">
+  The score reports featured on this page belong to genuine IRS Learning students and are shared with their permission. Individual results vary. IRS Learning is an official Pearson Approved PTE Training Partner.
+</p>
     <div class="dests rev">
-      <span class="dests-lab">Your PTE Score Is Just the Beginning.</span>
+      <span class="dests-lab">Your PTE Score is Just the Beginning. Our students Work or Study in</span>
       <div class="logos" aria-label="Universities our students now attend">
         <div class="logos-track">
           <div class="logos-set">
@@ -1056,7 +1074,6 @@
         </div>
       </div>
     </div>
-    <p class="res-disc rev">The score reports featured on this page belong to genuine IRS Learning students and are shared with their permission. Individual results vary. IRS Learning is an official Pearson Approved PTE Training Partner.</p>
   </div></section>
 
   <!-- ============ THE ALGORITHM HOOK (merged: positioning + problem + algorithm) ============ -->
@@ -1065,7 +1082,7 @@
       <div class="hook-grid">
         <div class="hook-lede">
           <span class="kick">How the PTE Exam Works</span>
-          <h2 class="hook-q">What High Scorers Understand About PTE.</h2>
+          <h2 class="hook-q">Understanding PTE Scores</h2>
           <p class="hook-lead">PTE Academic uses an AI-powered scoring system to assess your responses across every task type. Success isn't just about speaking or writing good English—it's about understanding what the scoring system rewards and applying the right strategies consistently.</p>
           <p class="hook-lead">In this live masterclass, our Pearson-certified trainer will explain how the test is assessed, break down all 22 PTE task types, and teach you practical templates and proven techniques to help you maximise your score.</p>
           <div class="cta-row"><a class="btn btn-primary" href="#book">Claim my seat · ₹499</a></div>
@@ -1075,7 +1092,7 @@
           <p class="reader-text">Technology has transformed the way people communicate across the world.</p>
           <div class="reader-tags"><span class="rt">Content  </span><span class="rt">Pronunciation</span><span class="rt">Oral Fluency  </span><span class="rt">Vocabulary</span></div>
           <div class="reader-verdict">
-            <span class="rv-ignored">Your final score is based on multiple assessment criteria working together—not just one aspect of your English.</span>
+            <span class="rv-ignored"><strong>Key Assessment Criteria:</strong> Your final score is based on multiple assessment criteria working together—not just one aspect of your English.</span>
             <span class="rv-score">Target Score   79+</span>
           </div>
         </div>
@@ -1625,8 +1642,8 @@
 
             <figure class="vid rev d1" tabindex="0" role="button" aria-label="Play Student Success Story">
                 <video class="vplayer"
-                       src="workshop-assets/videos/pte-success-01.mp4"
-                       poster="workshop-assets/videos/posters/site-5.jpg"
+                       src="/workshop/workshop-assets/videos/pte-success-01.mp4"
+                       poster="/workshop/workshop-assets/videos/posters/site-5.jpg"
                        preload="none"
                        playsinline></video>
 
@@ -1639,8 +1656,8 @@
 
             <figure class="vid rev d2" tabindex="0" role="button" aria-label="Play Student Success Story">
                 <video class="vplayer"
-                       src="workshop-assets/videos/site-2.mp4"
-                       poster="workshop-assets/videos/posters/site-2.jpg"
+                       src="/workshop/workshop-assets/videos/pte-success-02.mp4"
+                       poster="/workshop/workshop-assets/videos/posters/site-2.jpg"
                        preload="none"
                        playsinline></video>
 
@@ -1653,8 +1670,8 @@
 
             <figure class="vid rev d3" tabindex="0" role="button" aria-label="Play Student Success Story">
                 <video class="vplayer"
-                       src="workshop-assets/videos/site-4.mp4"
-                       poster="workshop-assets/videos/posters/site-4.jpg"
+                       src="/workshop/workshop-assets/videos/pte-success-03.mp4"
+                       poster="/workshop/workshop-assets/videos/posters/site-4.jpg"
                        preload="none"
                        playsinline></video>
 
@@ -1718,15 +1735,14 @@
       </div>
       <ul>
         <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>4-hour live masterclass + live Q&amp;A</li>
-        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>The template playbook for all 22 task types</li>
-        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Free mock-test assessment + your 79+ study plan</li>
+        <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Guidance on all 22 task types</li>
         <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><b>₹3,000 off</b> your official exam booking</li>
       </ul>
-      <div class="seats">
+      <!-- <div class="seats">
         <div class="t"><span>Seats remaining</span><span>Only <b data-seats>—</b> of 100 left</span></div>
         <div class="seatbar"><span class="seatfill"></span></div>
         <small>Live online · capped at 100 so Q&amp;A stays personal.</small>
-      </div>
+      </div> -->
       <div class="tk-pay">
         <div class="tk-pricerow">
           <div class="pr"><b>₹499</b><s>₹2,999</s></div>
@@ -1849,16 +1865,45 @@
 </section>
 
   <!-- ============ FINAL (contained dark card) ============ -->
-  <section class="sec final"><div class="inner">
+ <section class="sec final">
+  <div class="inner">
     <div class="final-card rev">
       <span class="grid-tx"></span>
-      <span class="eyebrow" style="justify-content:center"><span class="live"></span>Live · Sat 11 July · 10 AM IST</span>
-      <h2 style="margin-top:18px">One Saturday between you and <em>79+</em>.</h2>
-      <p>You've seen the method and the proof — the rest is just showing up.</p>
-      <a class="btn btn-primary btn-lg" href="#book">Claim my seat · ₹499<svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <div class="fmicro">SECURE UPI / CARD · NO SPAM, EVER · NOT AFFILIATED WITH PEARSON PLC</div>
+
+      <span class="eyebrow" style="justify-content:center">
+        <span class="live"></span>
+        LIVE ONLINE MASTERCLASS • LIMITED SEATS
+      </span>
+
+      <div class="mini-meta" style="margin-top:12px;">
+        Live · Saturday, 1 August 2026 · 10 AM IST
+      </div>
+
+      <h2 style="margin-top:18px">
+        One Decision. Four Hours. A Better PTE Score.
+      </h2>
+
+      <p>
+        You've seen the strategies. You've seen the results. Now it's your turn to prepare with confidence and take the next step towards your study, migration, or career goals.
+      </p>
+
+      <a class="btn btn-primary btn-lg" href="#book">
+        Reserve My Seat – ₹499
+        <svg class="ic" viewBox="0 0 24 24">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+
+      <div class="fmicro">
+        ✔️ Secure Online Payment &nbsp;&nbsp; ✔️ Instant Confirmation &nbsp;&nbsp; ✔️ Full Refund Before the Masterclass Begins
+      </div>
+
+      <div class="fmicro" style="margin-top:12px;">
+        IRS Learning is an official Pearson Approved PTE Training Partner. PTE Academic is owned and administered by Pearson.
+      </div>
     </div>
-  </div></section>
+  </div>
+</section>
 
   <footer class="site-footer"><div class="inner">
     <div class="ft-grid">
@@ -1874,12 +1919,9 @@
       <div class="ft-col">
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="success-stories.html">Success Stories</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="apply/form.html">Check Eligibility</a></li>
+          <li><a href="https://irslearning.com/">Home</a></li>
+          <li><a href="https://irslearning.com/mod/page/view.php?id=5">About</a></li>
+          <li><a href="https://irslearning.com/mod/page/view.php?id=29">Contact</a></li>
         </ul>
       </div>
 
@@ -1887,11 +1929,10 @@
       <div class="ft-col">
         <h4>Courses</h4>
         <ul>
-          <li><a href="ielts.html">IELTS</a></li>
-          <li><a href="toefl.html">TOEFL</a></li>
-          <li><a href="pte.html">PTE</a></li>
-          <li><a href="oet.html">OET</a></li>
-          <li><a href="study-abroad-and-work-abroad.html">Study &amp; Work Abroad</a></li>
+          <li><a href="https://irslearning.com/course/index.php?categoryid=2">IELTS</a></li>
+          <li><a href="https://irslearning.com/course/index.php?categoryid=3">GERMAN</a></li>
+          <li><a href="https://irslearning.com/course/index.php?categoryid=8">PTE</a></li>
+          <li><a href="https://irslearning.com/course/index.php?categoryid=5">OET</a></li>
         </ul>
       </div>
 
@@ -1940,43 +1981,6 @@
   </ul>
 </div>
 
-      <!-- Follow Us -->
-     <div class="ft-col ft-cta">
-
-    <span class="kick">LIVE ONLINE MASTERCLASS • LIMITED SEATS</span>
-
-    <h4>One Decision. Four Hours. A Better PTE Score.</h4>
-
-    <p>
-        You've seen the strategies. You've seen the results. Now it's your turn to prepare with confidence and take the next step towards your study, migration, or career goals.
-    </p>
-
-    <a href="#book" class="btn btn-primary">
-        Reserve My Seat – ₹499
-    </a>
-
-    <div class="ft-trust">
-
-        <span>
-            ✔ Secure Online Payment
-        </span>
-
-        <span>
-            ✔ Instant Confirmation
-        </span>
-
-        <span>
-            ✔ Full Refund Before the Masterclass Begins
-        </span>
-
-    </div>
-
-    <small class="ft-note">
-        IRS Learning is an official <strong>Pearson Approved PTE Training Partner</strong>.
-        <strong>PTE Academic</strong> is owned and administered by Pearson.
-    </small>
-
-</div>
     </div>
 
     <!-- Bottom bar -->
@@ -1990,7 +1994,7 @@
   <div class="sticky" id="sticky"><div class="sk-inner">
     <span class="sk-cd"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Starts in <b data-starts-short>—</b></span>
     <span class="sk-price mono" data-total>₹499</span>
-    <a class="gbadge sk-g" href="https://share.google/j01KQFivJWFxgZvNE" target="_blank" rel="noopener" aria-label="Rated 4.9 from 491 Google reviews"><svg class="gbadge-g"><use href="#g-logo"/></svg><span class="gbadge-body"><span class="gbadge-top"><b>4.9</b><span class="gstars">★★★★★</span></span><span class="gbadge-sub">491 Google reviews</span></span></a>
+    <a class="gbadge sk-g" href="https://share.google/WNQpG5QEucbziCTMm" target="_blank" rel="noopener" aria-label="Rated 4.7 from 1652 Google reviews"><svg class="gbadge-g"><use href="#g-logo"/></svg><span class="gbadge-body"><span class="gbadge-top"><b>4.9</b><span class="gstars">★★★★★</span></span><span class="gbadge-sub">491 Google reviews</span></span></a>
     <a class="btn btn-primary" href="#book">Claim my seat<span class="sk-bp"> · ₹499</span></a>
   </div></div>
 
@@ -2080,12 +2084,13 @@
 
   /* —— video showcase: click / keyboard to play —— */
   document.querySelectorAll('.vid').forEach(function(card){
-    function playVid(){
+    function playVid(e){
       var v=card.querySelector('video'); if(!v) return;
+      if (e && e.target === v && v.hasAttribute('controls')) return;
       if(v.paused){ v.setAttribute('controls',''); var p=v.play(); if(p&&p.catch)p.catch(function(){}); card.classList.add('playing'); }
     }
     card.addEventListener('click', playVid);
-    card.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); playVid(); } });
+    card.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); playVid(e); } });
   });
 
   /* —— scorecard lightbox (tap to enlarge & verify) —— */
@@ -2165,11 +2170,7 @@
       <input class="ws-in" id="ws-name" name="name" type="text" autocomplete="name" placeholder="Full name" required />
       <input class="ws-in" id="ws-email" name="email" type="email" autocomplete="email" placeholder="Email address" required />
       <input class="ws-in" id="ws-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="WhatsApp number" required />
-      <label class="bump" for="bump">
-        <input type="checkbox" id="bump" />
-        <span class="box"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-        <span class="bt"><b>Add the Mock Test Pack</b> — 5 full mock tests, 5 sectional tests &amp; 100+ practice questions per task type. Portal login emailed right after class — walk into the real exam having already sat it 5 times. <span class="add"><s>₹1,999</s> +₹590</span></span>
-      </label>
+
       <button class="btn btn-primary btn-lg btn-block" id="ws-pay" type="submit">Pay <span id="ws-pay-amt">₹499</span> · Confirm seat<svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <p class="ws-err" id="ws-err" hidden></p>
     </form>
